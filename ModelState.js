@@ -10,7 +10,14 @@ function ModelState(){
 	//it does not use id, parentId, or parentDirtyListCallback so they
 	//are set to null.  It also does not need ModelObject methods,
 	//so ModelState doesnt grab its prototypes.
-	ModelObject.call(this, "State", null, null, true, null);
+	ModelObject.call(this, "State", null, null, true);
+
+	//The model state needs many things from the drawable object class.
+	//the color and parentCallback functions are set to null
+	//because it has no color or parent.  Also, there is no
+	//need to inherit any methods from this class so its prototypes are
+	//not taken.
+	DrawableObject.call(this, null, null);
 
 	//the state object manages its own model matrix
 	//and view matrix.  The renderer handles proj
@@ -90,6 +97,8 @@ function ModelState(){
 // 	this.scene.draw(gl, renderer);
 // 	this.portal.draw(gl, renderer);
 // }
+
+
 
 ModelState.prototype.dirtyListCallback = function(dirtyObject){
 	this.dirtyList.push(dirtyObject);

@@ -5,16 +5,16 @@
 //Line object
 
 //Line class
-function Line(idIn, parentIdIn, parentDirtyListCallbackIn, point1In, point2In, colorIn){
+function Line(idIn, parentIdIn, parentDirtyListCallbackIn, vertex1In, vertex2In, colorIn){
 	
 	//Line inherits properties from ModelObject but not methods
-	ModelObject.call(this, "Line", idIn, parentIdIn, false, parentDirtyListCallbackIn);
+	ModelObject.call(this, "Line", idIn, parentIdIn);
 
 	//Line is a drawable object
-	DrawableObject.call(this, colorIn);
+	DrawableObject.call(this, colorIn, parentDirtyListCallbackIn);
 
-	this.point1 = point1In;
-	this.point2 = point2In;
+	this.vertex1 = vertex1In;
+	this.vertex2 = vertex2In;
 	
 
 }

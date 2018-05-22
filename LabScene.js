@@ -6,13 +6,10 @@
 
 function LabScene(idIn, parentIdIn, parentDirtyListCallbackIn){
 
-	ModelObject.call(this, "Scene", idIn, parentIdIn, true, parentDirtyListCallbackIn);
+	ModelObject.call(this, "Scene", idIn, parentIdIn, true);
 	
-	console.log(this.type);
-	console.log(this.usesRenderList);
+	DrawableObject.call(this, null, parentDirtyListCallbackIn);
 	
-
-
 
 	// this.type = "Scene";
 	// this.id = idIn;
@@ -81,13 +78,13 @@ function LabScene(idIn, parentIdIn, parentDirtyListCallbackIn){
 
 
 
-LabScene.prototype = Object.create(ModelObject.prototype);
+LabScene.prototype = Object.create(DrawableObject.prototype);
+
+LabScene.prototype.constructor = LabScene;
 
 LabScene.prototype.update = function(lastUpdate){
 
 };
-
-LabScene.prototype.constructor = LabScene;
 
 LabScene.prototype.onMouseUp = function(eyeX, eyeY, eyeZ, worldRay){
 	

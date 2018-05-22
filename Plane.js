@@ -4,41 +4,30 @@
 //Description: 
 //This class represents a plane.
 
-function Plane(idIn, parentIdIn, parentDirtyListCallback, xIn, yIn, zIn, normalXIn, normalYIn, normalZIn, upXIn, upYIn, upZIn){
+function Plane(idIn, parentIdIn, parentDirtyListCallbackIn, xIn, yIn, zIn, normalXIn, normalYIn, normalZIn, upXIn, upYIn, upZIn){
 	
-	//basic information about the plane
-	this.type = "Plane";
-	this.id = idIn;
-	this.parent = parentIdIn;
-	this.idGen = new IdGenerator();
+	ModelObject.call(this, "Plane", idIn, parentIdIn);
 
-	//rendering information
-	this.usesRenderList = true;
-	this.renderList = [];
-
-	//color of the plane
-	this.color = GREEN;
-	//callback function to the parent
-	//used to inform about children that need
-	//to be updated in the GPU because they have
-	//changed
-	this.passDirtyToParent = parentDirtyListCallback;
+	DrawableObject.call(this, GREEN, parentDirtyCallbackIn);
 
 	//location of the plane's center point
-	this.x = xIn;
-	this.y = yIn;
-	this.z = zIn;
+	this.planePointVector = new Vector3();
+	this.planePointVector.elements[0] = xIn;
+	this.planePointVector.elements[1] = yIn;
+	this.planePointVector.elements[2] = zIn;
 
 	//normal vector components
-	this.normalX = normalXIn;
-	this.normalY = normalYIn;
-	this.normalZ = normalZIn;
+	this.nVector = new Vector3();
+	this.nVector.elements[0] = normalXIn;
+	this.nVector.elements[1] = normalYIn;
+	this.nVector.elements[2]= normalZIn;
 
 	//Local Y axis vector components
-	this.upX = upXIn;
-	this.upY = upYIn;
-	this.upZ = upZIn;
-
+	this.upVector = new Vector3();
+	this.upVector.elements[0] = upXIn;
+	this.upVector.elements[1] = upYIn;
+	this.upVector.elements[2]= upZIn;
+	
 	//size of the plane in mm.  May be better
 	//to pass this into the constructor
 	//but for now I will hard code it
@@ -129,9 +118,9 @@ function Plane(idIn, parentIdIn, parentDirtyListCallback, xIn, yIn, zIn, normalX
 
 }
 
-Plane.prototype.dirtyListCallback = function(dirtyObject){
-	this.passDirtyToParent(dirtyObject);
-};
+Plane.prototype = Object.create(DrawableObject.prototype);
+
+Plane.prototype.constructor = Plane;
 
 Plane.prototype.update = function(){
 
